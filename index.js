@@ -14,12 +14,15 @@ process.stdin.on("data", function (data) {
       case "1":
         console.log("Qual o nome do paciênte? ")
         break;
-
+      case "3":
+        console.log("Qual consulta deseja remover? Digite o indice")
       case "2":
         consultas.forEach(function(obj, indice) {
           console.log(indice, obj)
         })
         opcao = undefined
+        if(opcao != "3")
+          opcao = undefined
         break;
       default:
         console.log("Opção inválida");
@@ -40,18 +43,21 @@ process.stdin.on("data", function (data) {
           console.log("Horário: ");
         } else {
           consulta.horario = entrada
+          consulta.removido = false
           consultas.push(consulta)
           console.log(`Consulta agendada com sucesso`)
           consulta = {}
           opcao = undefined
         }
         break;
-      case "2":
-        console.log("Listando consultas");
-        break;
       case "3":
         console.log("Desmarcando consulta");
         break;
+        indiceRemocao = entrada
+        consultas[indiceRemocao].removido = true
+        console.log("Consulta removida com sucesso")
+        opcao = undefined
+      break;
       case "4":
         console.log("Atualizando consulta");
         break;
